@@ -1,0 +1,68 @@
+#title p{
+    color: black;
+}
+
+#upper p{
+    color: purple;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+
+#about button {
+    background-color: #f5f5dc;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border: medium outset #fff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 30px;
+} 
+
+
+
+
+
+
+#final button {
+    background-color: #f5f5dc;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border: medium outset #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#final button:hover {
+    background-color: #dcd4b9;
+}
+
+#final text {
+    color: #5e8b7e;
+}
+
+#Questions button {
+    background-color: #f5f5dc;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border: medium outset #fff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 9px;
+}
+
+#Questions button:hover {
+    background-color: #dcd4b9;
+}
+
+#Questions text {
+    color: #000000;
+}
