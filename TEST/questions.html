@@ -1,61 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Answer Questions</title>
+  <title>Questions</title>
   <style>
     .question { margin-bottom: 20px; }
-    .question label { display: block; margin-left: 15px; }
+    .options button {
+      margin: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+    .options button.selected {
+      background-color: lightblue;
+    }
   </style>
 </head>
 <body>
   <h1>Answer the Questions</h1>
-  <form id="questionForm">
-    <div id="questionsContainer"></div>
-    <button type="submit">Submit</button>
-  </form>
+  <div id="questionsContainer"></div>
+  <button onclick="submitAnswers()">Submit</button>
 
   <script>
     const questions = [
-      { q: "Which colors do you like?", options: ["Red", "Blue", "Green", "Yellow"] },
-      { q: "Which pets do you own?", options: ["Dog", "Cat", "Bird", "Fish"] },
-      { q: "What are your favorite foods?", options: ["Pizza", "Pasta", "Sushi", "Salad"] },
-      // Add more questions until 20
+      { q: "Why is the name of the Book 'THE IMITATION GAME'?", options: ["Because they did a gameshow", "Because they built a computer that could imitate humans", "Becuause they imitated being the enemy"], correct: "Because they built a computer that could imitate humans" },      
+      { q: "What year does the book start at?", options: ["1937", "1939", "1941"], correct: "1939" },
+      { q: "Who is the main character?", options: ["Hugh Alexander", "Alan Turing", "Joan Clarke"], correct: "Alan Turing" },
+      { q: "What are they trying to do?", options: ["Decode the Enigma Code", "Decode the Puzzle Code ", "Decode the Russian Code"], correct: "Decode the Enigma Code" },
+      { q: "How did they decode the final code?", options: ["They build a modern computer", "They built a supercomputer", "They build a smart computer"], correct: "They built a supercomputer" },
+      { q: "What did the enemy do to betray themselves?", options: ["They put a special note at the end of every message", "They put a phrase to pray for their leader at the end", "they started everymessage with the same start"], correct: "They put a phrase to pray for their leader at the end" },
+      { q: "Who was the enemy?", options: ["France", "America", "Germany"], correct: "Germany" },
+      { q: "How did they name the computer?", options: ["Chris", "Christopher", "Christine"], correct: "Christopher" },
+      { q: "What is a special trait about the main character?", options: ["He is clumsy", "He doesnt communicate much", "He does understand everybody"], correct: "He doesnt communicate much" },
+      { q: "What is special about the main character?", options: ["He is gay", "He is a strict christan", "He "], correct: "He is gay" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+      { q: "A?", options: ["A", "A", "A"], correct: "A" },
+
+
+
+      
     ];
 
-    // Fill up to 20 sample questions
-    for (let i = questions.length + 1; i <= 20; i++) {
-      questions.push({ q: `Sample question ${i}?`, options: ["Option A", "Option B", "Option C"] });
-    }
 
+    const answers = {};
     const container = document.getElementById("questionsContainer");
 
-    questions.forEach((item, i) => {
+    questions.forEach((item, index) => {
       const div = document.createElement("div");
       div.className = "question";
-      div.innerHTML = `<strong>${i + 1}. ${item.q}</strong>`;
+      div.innerHTML = `<strong>${index + 1}. ${item.q}</strong>`;
 
-      item.options.forEach((opt, j) => {
-        const id = `q${i}_opt${j}`;
-        div.innerHTML += `
-          <label><input type="checkbox" name="q${i}" value="${opt}" id="${id}"> ${opt}</label>
-        `;
+      const btnGroup = document.createElement("div");
+      btnGroup.className = "options";
+
+      item.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+
+        btn.addEventListener("click", () => {
+          answers[`q${index}`] = {
+            selected: option,
+            correct: item.correct,
+            isCorrect: option === item.correct
+          };
+          // UI highlight
+          Array.from(btnGroup.children).forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        });
+
+        btnGroup.appendChild(btn);
       });
 
+      div.appendChild(btnGroup);
       container.appendChild(div);
     });
 
-    document.getElementById("questionForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const answers = {};
-      questions.forEach((item, i) => {
-        const checkboxes = document.querySelectorAll(`input[name="q${i}"]:checked`);
-        answers[`q${i + 1}`] = Array.from(checkboxes).map(cb => cb.value);
-      });
-
-      localStorage.setItem("checkboxAnswers", JSON.stringify(answers));
+    function submitAnswers() {
+      if (Object.keys(answers).length < questions.length) {
+        alert("Please answer all questions.");
+        return;
+      }
+      localStorage.setItem("quizResults", JSON.stringify(answers));
       window.location.href = "results.html";
-    });
+    }
   </script>
 </body>
 </html>
