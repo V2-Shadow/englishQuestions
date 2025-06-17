@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de"></html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>THE IMITATION GAME QUIZ</title>
+    <link rel="icon" type="image/x-icon" href="icon1.ico">
+</head>
+
+<body style="background-color:#d7dbdd;">
+    <h1>Finish the Quiz in under 24hrs</h1>
+    <hr>
+        <div id="button">
+        <a href="start.html">
+            <button class="unselected" type="button">HOME</button>
+        </a>
+    </div>
+    <hr>
+    
+    <div id="questionsContainer"></div>
+
+      <button class="button1" onclick="submitAnswers()">Submit</button>
+
+  <script>
+
+    const questions = [
+      { q: "Why is the name of the Book 'THE IMITATION GAME'?", options: ["Because they did a gameshow", "Because they built a machine that should imitate humans", "Becuause they imitated being the enemy"], correct: "Because they built a machine that should imitate humans" },      
+      { q: "What year does the book start at?", options: ["1937", "1939", "1941"], correct: "1939" },
+      { q: "Who is the main character?", options: ["Hugh Alexander", "Alan Turing", "Joan Clarke"], correct: "Alan Turing" },
+      { q: "What are they trying to do?", options: ["Decode the Enigma Code", "Decode the Puzzle Code ", "Decode the Russian Code"], correct: "Decode the Enigma Code" },
+      { q: "How did they decode the final code?", options: ["They build a modern computer", "They built a supercomputer", "They build a smart computer"], correct: "They built a supercomputer" },
+      { q: "How did the enemy do to betray themselves?", options: ["They ended every message with a note", "They put a phrase to pray for their leader at the end", "They started every message with the same start"], correct: "They put a phrase to pray for their leader at the end" },
+      { q: "Who was the enemy?", options: ["France", "America", "Germany"], correct: "Germany" },
+      { q: "How did they name the computer?", options: ["Chris", "Christopher", "Christine"], correct: "Christopher" },
+      { q: "What is a special trait of the main character?", options: ["He is clumsy", "He doesnt communicate much", "He likes to work with others"], correct: "He doesnt communicate much" },
+      { q: "Where is the team stationed at?", options: ["London", "Birningham", "Bletchley Park"], correct: "Bletchley Park" },
+      { q: "How did the team decode the messages before the arrival of the main character?", options: ["They couldnt", "They decoded it by hand", "They have not been a team"], correct: "They have not been a team" },
+      { q: "What did the main character do to become the team leader?", options: ["Ask politely", "Write a letter to the commander", "Write a letter to Churchill"], correct: "Write a letter to Churchill" },
+      { q: "How long did the recrutes of the main character have time to solve the crossword?", options: ["9 min", "3 min", "6 min"], correct: "6 min" },
+      { q: "What happend the machine cracked the code?", options: ["They told Churchill", "They told their commander ", "They told nobody"], correct: "They told nobody" },
+      { q: "What happend to the main character at the end of the book?", options: ["They lived a long and happy life", "They died", "They went to prison"], correct: "They died" },
+    ];
+
+
+    const answers = {};
+    const container = document.getElementById("questionsContainer");
+
+    questions.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<strong>${index + 1}. ${item.q}</strong>`;
+
+      const btnGroup = document.createElement("div");
+      btnGroup.className = "options";
+
+      item.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+
+        btn.addEventListener("click", () => {
+          answers[`q${index}`] = {
+            selected: option,
+            correct: item.correct,
+            isCorrect: option === item.correct
+          };
+          // UI highlight
+          Array.from(btnGroup.children).forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        });
+
+        btnGroup.appendChild(btn);
+      });
+
+      div.appendChild(btnGroup);
+      container.appendChild(div);
+    });
+
+    function submitAnswers() {
+      if (Object.keys(answers).length < questions.length) {
+        alert("You did not answer all Questions. Please answer all of them.");
+        return;
+      }
+      localStorage.setItem("quizResults", JSON.stringify(answers));
+      window.location.href = "results.html";
+    }
+  </script>
+  <hr>
+  <p>Read the about me :D</p>
+      <div id="button">
+        <a href="about.html">
+            <button class="unselected" type="button">ABOUT</button>
+        </a>
+    </div>
+  <hr>
+</body>

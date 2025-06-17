@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>THE IMITATION GAME QUIZ</title>
+    <link rel="icon" type="image/x-icon" href="icon1.ico">
+</head>
+
+<body style="background-color:#d7dbdd;">
+    <div>
+        <h1>You have Finished the QUIZ</h1>
+    </div>
+
+
+    <hr>
+    <div id="button">
+        <a href="start.html">
+          <button class="unselected" type="button">Home</button>
+        </a>
+    </div>  
+
+
+
+    <hr></hr>
+      <h1>Your Results</h1>
+  <div id="resultsContainer"></div>
+
+  <script>
+    const results = JSON.parse(localStorage.getItem("quizResults"));
+    const container = document.getElementById("resultsContainer");
+
+    if (results) {
+      Object.entries(results).forEach(([key, value], index) => {
+        const div = document.createElement("div");
+
+        if (value.isCorrect) {
+          div.innerHTML = `<strong>Question ${index + 1}</strong>: ✅ <span class="correct">${value.selected}</span>`;
+        } else {
+          div.innerHTML = `<strong>Question ${index + 1}</strong>: ❌ <span class="wrong">${value.selected}</span> (Correct: <strong>${value.correct}</strong>)`;
+        }
+
+        container.appendChild(div);
+      });
+    } else {
+      container.textContent = "No results found.";
+    }
+  </script>
+
+  <hr>
+    <div id="button">
+        <a href="questions.html">
+          <button class="unselected" type="button">Retake QUIZ</button>
+        </a>
+    </div>  
+
+
+
+  <hr>
+        <div id="button">
+        <a href="about.html">
+            <button class="unselected" type="button">ABOUT</button>
+        </a>
+    </div>
+  <hr>
+</body>

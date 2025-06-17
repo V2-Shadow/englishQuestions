@@ -1,5 +1,10 @@
 #title p{
-    color: black;
+    color: #000;
+}
+
+h1{
+    text-align: center;
+    color: #000;
 }
 
 #upper p{
@@ -8,7 +13,7 @@
 }
 
 
-#about button {
+#button button {
     background-color: #f5f5dc;
     padding: 10px 15px;
     text-align: center;
@@ -19,9 +24,30 @@
     cursor: pointer;
     font-weight: bold;
     border-radius: 30px;
-} 
+}   
 
+#button button:hover {
+    background-color: #ddddc6;
+    border: medium outset #e6e6e6
+}
 
+.button1 {
+    background-color: #f0f0f0;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border: medium outset #000;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 40px;
+}   
+
+.button1:hover {
+    background-color: #f9f9f9;
+    border: medium outset #b4b4b4
+}
 
 
 
@@ -66,3 +92,30 @@
 #Questions text {
     color: #000000;
 }
+
+
+/* buttons for questions */
+
+.question { 
+    margin-bottom: 1%; 
+}
+
+.options button {
+  margin: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 30px;
+}
+.options button:hover{
+    background-color: #c0c0c0;
+}
+
+.options button.selected {
+    background-color: #a0a0a0;
+}
+
