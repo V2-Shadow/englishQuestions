@@ -24,6 +24,7 @@ h1{
     cursor: pointer;
     font-weight: bold;
     border-radius: 30px;
+    color: #34495e;
 }   
 
 #button button:hover {
